@@ -1,19 +1,18 @@
 package model;
 
 public class SubTask extends Task {
-    private Epic epic;
+    private int epicID;
 
-    public Epic getEpic() {
-        return epic;
+    public SubTask(String title, String description, int epicID) {
+        super(title, description);
+        this.epicID = epicID;
     }
 
-    public void setEpic(Epic epic) {
-        this.epic = epic;
+    public int getEpicID() {
+        return epicID;
     }
 
-    public SubTask(String title, String description, TaskStatus status) {
-        super(title, description, status);
+    public void setEpicID(int epicID) {
+        this.epicID = epicID;
     }
-
-
 }
