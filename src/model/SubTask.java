@@ -1,7 +1,7 @@
 package model;
 
 public class SubTask extends Task {
-    private int epicID;
+    private final int epicID;
 
     public SubTask(String title, String description, int epicID) {
         super(title, description);
@@ -10,9 +10,5 @@ public class SubTask extends Task {
 
     public int getEpicID() {
         return epicID;
-    }
-
-    public void setEpicID(int epicID) {
-        this.epicID = epicID;
     }
 }
