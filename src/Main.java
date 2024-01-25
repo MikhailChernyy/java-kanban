@@ -40,9 +40,8 @@ public class Main {
         System.out.println(taskManager.getAllEpics());
         System.out.println(taskManager.getAllSubTask());
 
-        taskManager.removeTaskByID(1);
-        taskManager.removeEpicByID(4);
-
+        taskManager.removeTaskById(1);
+        taskManager.removeEpicById(4);
         System.out.println("\n" + taskManager.getAllTasks());
         System.out.println(taskManager.getAllEpics());
     }
