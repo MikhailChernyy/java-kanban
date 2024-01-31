@@ -2,12 +2,14 @@ import model.Epic;
 import model.SubTask;
 import model.Task;
 import model.TaskStatus;
+import service.InMemoryHistoryManager;
+import service.InMemoryTaskManager;
 import service.TaskManager;
 
 public class Main {
 
     public static void main(String[] args) {
-        final TaskManager taskManager = new TaskManager();
+        final TaskManager taskManager = new InMemoryTaskManager(new InMemoryHistoryManager());
         Task task1 = new Task("Переезд", "Нужно собрать вещи");
         Task task2 = new Task("Починить машину", "Нужно заехать в автосервис");
         Epic epic1 = new Epic("Эпик 1", "///");
