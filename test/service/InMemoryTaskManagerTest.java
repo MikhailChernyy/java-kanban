@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryTaskManagerTest {
-    TaskManager taskManager = Managers.getDefaultTaskManager();
+    TaskManager taskManager = Managers.getDefault();
     Task task1 = new Task("Переезд", "Нужно собрать вещи");
     Task task2 = new Task("Починить машину", "Нужно заехать в автосервис");
     Epic epic1 = new Epic("Эпик 1", "///");

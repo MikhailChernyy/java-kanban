@@ -9,7 +9,7 @@ import service.TaskManager;
 public class Main {
 
     public static void main(String[] args) {
-        final TaskManager taskManager = new InMemoryTaskManager(new InMemoryHistoryManager());
+        final TaskManager taskManager = new InMemoryTaskManager();
         Task task1 = new Task("Переезд", "Нужно собрать вещи");
         Task task2 = new Task("Починить машину", "Нужно заехать в автосервис");
         Epic epic1 = new Epic("Эпик 1", "///");

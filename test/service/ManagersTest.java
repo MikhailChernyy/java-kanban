@@ -13,7 +13,7 @@ class ManagersTest {
 
     @Test
     void shouldBeReturnInitializedTaskManager() {
-        TaskManager taskManager = Managers.getDefaultTaskManager();
+        TaskManager taskManager = Managers.getDefault();
         assertNotNull(taskManager);
     }
 
