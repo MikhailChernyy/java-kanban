@@ -10,15 +10,23 @@ import static org.junit.jupiter.api.Assertions.*;
 class InMemoryHistoryManagerTest {
 HistoryManager historyManager = Managers.getDefaultHistory();
     Task task = new Task("Переезд", "Нужно собрать вещи");
+    Task task2 = new Task("Спорт", "Записаться в зал");
     @Test
-    void shouldBeSaveThePreviousTaskVersion() {
-        historyManager.addTaskInHistory(task);
-        task.setTitle("Обновление");
-        historyManager.addTaskInHistory(task);
-        final List<Task> history = historyManager.getHistory();
-        assertNotNull(history, "История не пустая.");
-        assertEquals(history.get(0).getTitle(), "Переезд", "Предидущая версия не сохраняется.");
-        assertEquals(history.get(1).getTitle(), "Обновление");
+    void add_shouldAddTasksToHistoryList() {
+        historyManager.add(task);
+        Task thisTask = task;
+
+        assertEquals(List.of(thisTask), historyManager.getHistory());
+    }
+
+    @Test
+    void remove_shouldRemoveATaskFromHistory() {
+        historyManager.add(task);
+        historyManager.add(task2);
+        Task thisTask1 = task2;
+        historyManager.remove(1);
+
+        assertEquals(List.of(thisTask1), historyManager.getHistory());
     }
 
 }
