@@ -7,12 +7,23 @@ public class Task {
     private String description;
     private int id;
     private TaskStatus status;
+    private TaskType type;
 
     public Task(String title, String description) {
         this.title = title;
         this.description = description;
         this.status = TaskStatus.NEW;
+        this.type = TaskType.TASK;
     }
+
+    public Task(int id, String title, String description, TaskStatus status) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.status = status;
+    }
+
+    public Task() {}
 
     public String getTitle() {
         return title;
@@ -46,6 +57,13 @@ public class Task {
         this.status = status;
     }
 
+    public void setType(TaskType type) {
+        this.type = type;
+    }
+    public TaskType getType() {
+        return type;
+    }
+
     @Override
     public String toString() {
         return "Task{" + "title='" + title + '\'' + ", description='" + description + '\'' + ", id=" + id + ", status=" + status + '}';
@@ -62,5 +80,9 @@ public class Task {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public String toStringFromFile() {
+        return String.format("%s,%s,%s,%s,%s,%s", id, type, title, status, description, "");
     }
 }
