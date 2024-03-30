@@ -4,6 +4,9 @@ import exeptions.ManagerSaveException;
 import model.*;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -137,7 +140,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     public void save() {
-        try (Writer writer = new FileWriter(file)) {
+        try (Writer writer = Files.newBufferedWriter(Paths.get(file.toURI()), StandardCharsets.UTF_8)) {
             writer.write("id,type,title,status,description,startTime,duration,epic");
             HashMap<Integer, String> allTasks = new HashMap<>();
 
@@ -170,7 +173,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     public  void loadFromFile(File file) {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(file.toURI()), StandardCharsets.UTF_8)) {
             String line;
             while (bufferedReader.ready()) {
                 line = bufferedReader.readLine();
