@@ -19,10 +19,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         this.file = new File(path);
     }
 
-    public FileBackedTaskManager(File file) {
-        this.file = file;
-    }
-
     private static Task fromString(String value) {
         Task task = new Task();
         List<Integer> subtasksIds = new ArrayList<>();
