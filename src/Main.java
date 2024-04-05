@@ -1,15 +1,15 @@
-import model.Epic;
-import model.SubTask;
-import model.Task;
-import model.TaskStatus;
-import service.InMemoryHistoryManager;
-import service.InMemoryTaskManager;
-import service.TaskManager;
+import service.HttpTaskServer;
+import service.Managers;
+
+import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) {
-        final TaskManager taskManager = new InMemoryTaskManager();
+    public static void main(String[] args) throws IOException {
+        HttpTaskServer httpTaskServer = new HttpTaskServer(Managers.getDefault());
+        httpTaskServer.start();
+
+        /*final TaskManager taskManager = new InMemoryTaskManager();
         Task task1 = new Task("Переезд", "Нужно собрать вещи");
         Task task2 = new Task("Починить машину", "Нужно заехать в автосервис");
         Epic epic1 = new Epic("Эпик 1", "///");
@@ -45,6 +45,6 @@ public class Main {
         taskManager.removeTaskById(1);
         taskManager.removeEpicById(4);
         System.out.println("\n" + taskManager.getAllTasks());
-        System.out.println(taskManager.getAllEpics());
+        System.out.println(taskManager.getAllEpics());*/
     }
 }
