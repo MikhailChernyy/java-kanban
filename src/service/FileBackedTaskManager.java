@@ -7,6 +7,8 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +29,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         String title = null;
         TaskStatus status = null;
         String description = null;
+        LocalDateTime startTime = null;
+        Duration duration = null;
         int epicId = 0;
         String[] elements = value.split(",");
         if (elements[2].equals("EPIC")) {
@@ -37,17 +41,20 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             title = String.valueOf(elements[2]);
             status = TaskStatus.valueOf(elements[3]);
             description = elements[4];
-            if (elements.length == 6) {
-                epicId = Integer.parseInt(elements[5]);
+            duration = Duration.parse(elements[5]);
+            startTime = LocalDateTime.parse(elements[6]);
+
+            if (elements.length == 8) {
+                epicId = Integer.parseInt(elements[7]);
             }
         }
 
         if (type == TaskType.TASK) {
-            return new Task(id, title, description, status);
+            return new Task(id, title, description, duration, startTime, status);
         } else if (type == TaskType.SUBTASK) {
-            return new SubTask(epicId, id, title, description, status);
+            return new SubTask(epicId, id, title, description, duration, startTime, status);
         } else if (type == TaskType.EPIC) {
-            return new Epic((ArrayList<Integer>) subtasksIds, id, title, description, status);
+            return new Epic((ArrayList<Integer>) subtasksIds, id, title, description, duration, startTime, status);
         }
         return task;
     }
@@ -70,9 +77,10 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     @Override
-    public void createTask(Task task) {
+    public Task createTask(Task task) {
         super.createTask(task);
         save();
+        return task;
     }
 
     @Override
@@ -94,9 +102,10 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     @Override
-    public void createEpic(Epic epic) {
+    public Epic createEpic(Epic epic) {
         super.createEpic(epic);
         save();
+        return epic;
     }
 
     @Override
@@ -118,9 +127,10 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     @Override
-    public void createSubTask(SubTask subTask) {
+    public SubTask createSubTask(SubTask subTask) {
         super.createSubTask(subTask);
         save();
+        return subTask;
     }
 
     @Override
