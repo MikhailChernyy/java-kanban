@@ -152,6 +152,26 @@ public class InMemoryTaskManager implements TaskManager {
         return tasks;
     }
 
+  public List<Task> getHistory() {
+        return historyManager.getHistory();
+  }
+
+    public InMemoryHistoryManager getHistoryManager() {
+        return historyManager;
+    }
+
+    public HashMap<Integer, Task> getTasks() {
+        return tasks;
+    }
+
+    public HashMap<Integer, Epic> getEpics() {
+        return epics;
+    }
+
+    public HashMap<Integer, SubTask> getSubTasks() {
+        return subTasks;
+    }
+
     private int generateId() {
         return ++seq;
     }
